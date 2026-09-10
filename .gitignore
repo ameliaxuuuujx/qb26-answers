@@ -1,0 +1,4 @@
+*.gz
+*.bed
+.DS_Store
+*.tsv

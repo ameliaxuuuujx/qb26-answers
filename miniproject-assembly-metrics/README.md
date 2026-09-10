@@ -12,6 +12,7 @@ This assignment downloads and analyzes four *Caenorhabditis remanei* genome FAST
     - Number of contigs:  1591
     - Total length: 118549266
     - Average length: 74512.42363293526
+    - N50 statistics: 59794567
 
 - BioProject PRJNA248911 (2015): https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA248911/caenorhabditis_remanei.PRJNA248911.WBPS19.genomic.fa.gz
 
@@ -19,6 +20,7 @@ This assignment downloads and analyzes four *Caenorhabditis remanei* genome FAST
     - Number of contigs:  912
     - Total length: 124541912
     - Average length: 136559.11403508772
+    - N50 statistics: 63523268
 
 - BioProject PRJNA53967 (No record): https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA53967/caenorhabditis_remanei.PRJNA53967.WBPS19.genomic.fa.gz
 
@@ -26,6 +28,7 @@ This assignment downloads and analyzes four *Caenorhabditis remanei* genome FAST
     - Number of contigs:  3670
     - Total length: 145442736
     - Average length: 39630.17329700272
+    - N50 statistics: 72908098
 
 
 - BioProject PRJNA577507 (2019): https://ftp.ebi.ac.uk/pub/databases/wormbase/parasite/releases/WBPS19/species/caenorhabditis_remanei/PRJNA577507/caenorhabditis_remanei.PRJNA577507.WBPS19.genomic.fa.gz
@@ -34,7 +37,9 @@ This assignment downloads and analyzes four *Caenorhabditis remanei* genome FAST
     - Number of contigs:  187
     - Total length: 130480874
     - Average length: 697758.6844919786
+    - N50 statistics: 69795354
+
 
 ### Summary of results
 
-The results show a clear improvement in assembly contiguity over time. The 2014 assembly has 1,591 contigs with an average contig length of 74.5 kb, while the 2015 assembly has fewer contigs (912) and a larger average contig length (136.6 kb). The 2019 assembly is the most contiguous, with only 187 contigs and an average contig length of 697.8 kb. This trend is consistent with advances in sequencing and genome-assembly methods, such as longer sequencing reads and improved software. However, these metrics alone cannot prove that sequencing technology was the only cause, since coverage, sample quality, and assembly parameters may also affect assembly quality.
+The results show a clear improvement in assembly contiguity over time. The 2014 assembly has 1,591 contigs with an average contig length of 74.5 kb, while the 2015 assembly has fewer contigs (912) and a larger average contig length (136.6 kb). The 2019 assembly is the most contiguous, with only 187 contigs and an average contig length of 697.8 kb. This trend is consistent with advances in sequencing and genome-assembly methods, such as longer sequencing reads and improved software. The N50 values also support this trend: a higher N50 indicates that a larger proportion of the assembly is contained in longer contigs, reflecting greater assembly contiguity. However, these metrics alone cannot prove that sequencing technology was the only cause, since coverage, sample quality, and assembly parameters may also affect assembly quality.

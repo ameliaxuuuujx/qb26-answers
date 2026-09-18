@@ -1,0 +1,39 @@
+---
+title: "exercise2"
+output: html_notebook
+---
+
+## Load Libraries 
+
+```{r}
+library(tidyverse)
+```
+
+
+## Read in hg19-kc-count.bed and hg16-kc-count.bed
+```{r}
+header <- c( "chr", "start", "end", "count" )
+df_19kc <- read_tsv('/Users/cmdb/qb26-answers/week1/hg19-kc-count.bed', col_names=header )
+df_16kc <- read_tsv('/Users/cmdb/qb26-answers/week1/hg16-kc-count.bed', col_names=header )
+```
+
+## Combine the dataframes
+```{r}
+combined <- bind_rows( hg19=df_19kc, hg16=df_16kc, .id="assembly" )
+```
+
+
+## Visualize both hg19 and hg16 gene distributions on the same line plots
+```{r}
+p2 <- combined %>% 
+  ggplot(aes(x = start, y = count, color = assembly)) +
+  geom_line() +
+  facet_wrap(~ chr, scales = "free", ncol = 3) +
+  labs(x = "Chromosome position (Mb)",
+       y = "Canonical transcripts per 1 Mb",
+       color = "Assembly") +
+  theme_classic()
+
+ggsave("exercise2.png", plot = p2, width = 14, height = 20, units = "in", dpi = 300)
+```
+

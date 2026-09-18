@@ -1,0 +1,31 @@
+---
+title: "R No"
+output: html_notebook
+---
+
+## Load Packages
+
+```{r}
+library(tidyverse)
+```
+
+## Read in hg19-kc-count.bed and specify the header
+
+```{r}
+  header <- c( "chr", "start", "end", "count" )
+  df_kc <- read_tsv( '/Users/cmdb/qb26-answers/week1/hg19-kc-count.bed', col_names=header )
+```
+
+## plot gene density across all 25 main chromosomes
+
+```{r}
+p1 <- df_kc %>% 
+  ggplot(aes(x = start, y = count)) +
+  geom_line() +
+  facet_wrap(~ chr, scales = "free", ncol = 3) +
+  labs(x = "Chromosome position (Mb)",
+       y = "Canonical transcripts per 1 Mb") +
+  theme_bw()
+
+ggsave("exercise1.png", plot = p1, width = 14, height = 20, units = "in", dpi = 300)
+```

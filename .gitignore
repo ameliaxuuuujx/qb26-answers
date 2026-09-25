@@ -1,4 +1,5 @@
-*.gz
-*.bed
+*.fq.gz
 .DS_Store
-*.tsv
+*.sam
+*.bam
+*.bam.bai

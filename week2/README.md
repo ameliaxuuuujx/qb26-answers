@@ -35,3 +35,11 @@
 | chrI:28323 | B | R | R | B | R | B | R | B | B | B |
 | chrI:28652 | B | R | R | B | R | B | R | B | B | B |
 | chrI:29667 | B | R | R | B | R | B | R | B | B | B |
+
+**Question 3.1:** Open the VCF with `less -S` and look at the header lines beginning with `##`. Then find the `#CHROM` line. What are the last 10 columns, and where did those names come from?
+
+- The last 10 columns contain genotype data for the 10 samples: A01_62, A01_39, A01_63, A01_35, A01_31, A01_27, A01_24, A01_23, A01_11, and A01_09. These sample names correspond to the BAM files listed in `bamListFile.txt`. Each BAM file contains a read-group sample name (`SM`), which FreeBayes uses as the column name in the VCF file.
+
+**Question 3.2:** Why does the ploidy argument matter here? What would a genotype look like if you had told FreeBayes these samples were diploid?
+
+- The ploidy argument matters because the segregants are haploid and carry one allele at each genomic position. Therefore, the correct ploidy is `-p 1`, and the genotype calls are `0` (reference allele) or `1` (alternative allele). If FreeBayes were told that the samples were diploid, it would model two alleles per sample and report genotypes such as `0/0`, `0/1`, or `1/1`. In particular, `0/1` heterozygous calls would not be biologically appropriate for these haploid segregants.

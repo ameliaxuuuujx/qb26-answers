@@ -43,3 +43,21 @@
 **Question 3.2:** Why does the ploidy argument matter here? What would a genotype look like if you had told FreeBayes these samples were diploid?
 
 - The ploidy argument matters because the segregants are haploid and carry one allele at each genomic position. Therefore, the correct ploidy is `-p 1`, and the genotype calls are `0` (reference allele) or `1` (alternative allele). If FreeBayes were told that the samples were diploid, it would model two alleles per sample and report genotypes such as `0/0`, `0/1`, or `1/1`. In particular, `0/1` heterozygous calls would not be biologically appropriate for these haploid segregants.
+
+**Question 4.1:** Interpret this figure in two or three sentences in your own words. Does it look as expected? Why or why not? Bonus: what is the name of this distribution?
+
+![Allele Frequency Spectrum](AF.png)
+
+- Most variants have intermediate alternative allele frequencies, with the highest number of variants near 0.4-0.5 and relatively few variants near 0 or 1. This pattern is expected because each haploid segregant has approximately a 50% chance of inheriting the RM allele at a segregating site, so the allele frequencies among 10 segregants tend to cluster around 0.5. This allele frequency spectrum approximately follows a binomial distribution.
+
+**Question 4.2:** Do you notice any patterns? What do the transitions indicate?
+
+![Ancestry of A01_62 on chrII](ancestry_A01_62_chrII.png)
+
+- A01_62 is predominantly BY/reference (`0`) from the beginning of chrII to approximately 550,000 bp, then predominantly RM/alternative (`1`) from approximately 550,000 bp to the end of the chromosome. This transition indicates a recombination crossover, where the inherited chromosome switches from a BY-derived segment to an RM-derived segment.
+
+**Question 4.3:** Do the samples that looked like BY in your IGV screenshot from Exercise 2 also look like BY at the left end of chrI here? Do any samples appear to be mostly one parent across the whole genome?
+
+![Genome-wide Ancestry](ancestry.png)
+
+- Yes. The samples that appeared to carry BY ancestry in the Exercise 2 IGV view (A01_09, A01_24, A01_31, A01_39, A01_62, and A01_63) also show mostly BY/reference (`0`, blue) genotypes on chrI. The remaining samples show RM/alternative (`1`, red) genotypes in that region. No sample appears to have inherited almost its entire genome from only one parent; instead, each sample contains a mosaic of BY- and RM-derived blocks across the genome, consistent with meiotic recombination.

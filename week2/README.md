@@ -61,3 +61,12 @@
 ![Genome-wide Ancestry](ancestry.png)
 
 - Yes. The samples that appeared to carry BY ancestry in the Exercise 2 IGV view (A01_09, A01_24, A01_31, A01_39, A01_62, and A01_63) also show mostly BY/reference (`0`, blue) genotypes on chrI. The remaining samples show RM/alternative (`1`, red) genotypes in that region. No sample appears to have inherited almost its entire genome from only one parent; instead, each sample contains a mosaic of BY- and RM-derived blocks across the genome, consistent with meiotic recombination.
+
+**Question 5.1:** Do you think a single “discordant” SNP is sufficient to call a crossover? Why or why not?
+
+- A single discordant SNP is not sufficient to call a crossover because it may result from sequencing, mapping, or genotype-calling error. I think that at least twenty consecutive SNPs with the new genotype should be required before counting an ancestry switch as a crossover.
+
+**Question 5.2:** What does the distribution of crossovers look like? Published estimates for this system are roughly 90 crossovers per meiosis. Each crossover involves two of the four chromatids, so a single spore should carry about half that number. How does your estimate compare, and if it is off, in which direction and why?
+![crossover per segregant](crossovers.png)
+
+- The crossover counts range from 42 to 60 per segregant and are centered around approximately 50 crossovers. The mean crossover count is 49.9, which is slightly higher than the expected value of about 45 crossovers per haploid spore (half of the approximately 90 crossovers per meiosis). The estimate may be slightly high because some remaining genotype-calling, sequencing, or mapping errors may still be interpreted as ancestry switches, even with the requirement for 20 consecutive SNPs.

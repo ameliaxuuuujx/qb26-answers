@@ -12,3 +12,12 @@ After filtering, the PCA plot looks similar to the original. Samples from the sa
 
 ## Step 2.2 & 2.3
 ![](gene_pca.png)
+
+## Step 3.1: order expression times and plot data
+![](ordered_gene_expression_heatmap.png)
+
+## Step 3.2: Phase expression times and plot data
+![](phased_gene_expr_heatmap.png)
+
+## Step 3.4: Plot the clustered data
+![](clustered_gene_expr_heatmap.png)

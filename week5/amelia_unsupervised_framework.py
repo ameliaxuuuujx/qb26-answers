@@ -23,9 +23,10 @@ def main():
     pca_analysis_plot(nf_rep_data, rep_times, reps, "replicate_data_pca.png")
 
     # Step2.1: filtering the data by mean expression and scaled standard deviation
-    filtered_nf_rep_data = filter_genes(nf_rep_data)
-    filtered_nf_data = filter_genes(nf_data)
-    filtered_rapa_data = filter_genes(rapa_data)
+    gene_filter = filter_genes(nf_data)
+    filtered_nf_rep_data = nf_rep_data[gene_filter, :]
+    filtered_nf_data = nf_data[gene_filter, :]
+    filtered_rapa_data = rapa_data[gene_filter, :]
 
     print("Replicate data:", nf_rep_data.shape, "->", filtered_nf_rep_data.shape)
     print("Ctrl data:", nf_data.shape, "->", filtered_nf_data.shape)
@@ -42,6 +43,23 @@ def main():
 
     # Plot the ctrl genes; color each point by its peak timepoint
     x_coords, y_coords = plot_gene_pca(norm_nf_data, peak, "gene_pca.png")
+
+    # Step 3.1 order expression times and plot the data
+    angles = numpy.arctan2(y_coords, x_coords)
+    plot_hm(norm_nf_data, orderby=angles, xlabel="Timepoint", ylabel='Genes', title="Ctrl genes ordered by PCA angle", fname="ordered_gene_expression_heatmap.png")
+
+    #step3.2: phase expression times and plot data
+    aligned_nf_data = align_times(norm_nf_data, angles)
+    aligned_rapa_data = align_times(norm_rapa_data, angles)
+    plot_hm(aligned_nf_data, xlabel="Aligned timepoint", ylabel='Genes', title = 'Phased Ctrl gene expression', fname='phased_gene_expr_heatmap.png')
+
+    #step3.3: cluster data
+    combined_data = numpy.concatenate((aligned_nf_data, aligned_rapa_data), axis =1)
+    kmeans = KMeans(n_clusters=6, random_state=42)
+    groups = kmeans.fit_predict(combined_data)
+
+    #step3.4 plot clustered data
+    plot_hm(aligned_nf_data, aligned_rapa_data, orderby=groups, showgroups=True, xlabel='Aligned timepoint', ylabel='Genes', title='Ctrl and Rapa gene clusters', fname = "clustered_gene_expr_heatmap.png")
 
 def plot_gene_pca (data, colors, fig_name): #Step2.2
     pca = PCA(n_components=2, random_state=42)
@@ -62,7 +80,7 @@ def filter_genes(data): # step2.1
     stds = numpy.std(data, axis=1)
     scaled_stds = numpy.divide(stds, means, out=numpy.zeros_like(stds), where=means>0)
     gene_filter = (means > 0.85) & (scaled_stds > 0.115)
-    return data[gene_filter, :]
+    return gene_filter
 
 def pca_analysis_plot(data, times, reps, fig_name): #step1.2
     pca = PCA(random_state=42)
@@ -196,8 +214,8 @@ def align_times(data, angle):
     offsets[numpy.where(offsets < 0)] += n
     aligned = numpy.zeros_like(data)
     for i in range(data.shape[0]):
-        aligned[i, :] = (numpy.roll(data[i, :], numpy.floor(offsets[i])) * (numpy.ceil(offsets[i]) - offsets[i]) +
-                         numpy.roll(data[i, :], numpy.ceil(offsets[i])) * (offsets[i] - numpy.floor(offsets[i])))
+        aligned[i, :] = (numpy.roll(data[i, :], int(numpy.floor(offsets[i]))) * (numpy.ceil(offsets[i]) - offsets[i]) +
+                         numpy.roll(data[i, :], int(numpy.ceil(offsets[i]))) * (offsets[i] - numpy.floor(offsets[i])))
     return aligned
 
 
